@@ -198,13 +198,13 @@
             <section class="grid grid-cols-1 lg:grid-cols-5 gap-4">
                 <div class="lg:col-span-3 space-y-2">
                     <div class="flex items-center justify-between text-[11px] opacity-40">
-                        <span>1. inicializar_ambiente</span>
+                        <span>1. portfolio_ssh</span>
                         <span class="text-[10px] opacity-30">ENV_SET</span>
                     </div>
                     <div class="border border-hermes-border px-4 py-3 text-xs font-mono lowercase flex justify-between items-center"
                          style="background:rgba(0,0,0,0.4)">
-                        <code class="break-all text-hermes-text/90"><span class="text-hermes-accent">curl</span> -fsSL https://vitorhugo.dev/setup.sh | bash</code>
-                        <span class="text-[10px] tracking-widest opacity-40 uppercase cursor-pointer hover:text-white transition-colors ml-4">COPY</span>
+                        <code class="break-all text-hermes-text/90"><span class="text-hermes-accent">ssh</span> -p 2222 163.176.214.184</code>
+                        <span onclick="navigator.clipboard.writeText('ssh -p 2222 163.176.214.184')" class="text-[10px] tracking-widest opacity-40 uppercase cursor-pointer hover:text-white transition-colors ml-4">COPY</span>
                     </div>
                 </div>
             </section>
