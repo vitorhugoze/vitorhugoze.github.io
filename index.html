@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="
+  --foreground: color-mix(in srgb, #ffffff 0%, transparent);
+  --foreground-base: #ffffff;
+  --midground: color-mix(in srgb, #ffe6cb 100%, transparent);
+  --midground-base: #ffe6cb;
+  --background: color-mix(in srgb, #041c1c 100%, transparent);
+  --background-base: #041c1c;
+  --selection-bg: oklch(85% 0.12 90);
+">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitor Hugo Zeferino — Software Engineer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        hermes: {
+                            text: '#ffe6cb',
+                            accent: '#ffff89',
+                            border: 'rgba(255, 230, 203, 0.15)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        ::selection {
+            background-color: oklch(85% 0.12 90);
+            color: #041c1c;
+        }
+
+        @keyframes driftA {
+            0%   { transform: translate(0, 0) scale(1); }
+            33%  { transform: translate(3%, 2%) scale(1.04); }
+            66%  { transform: translate(-2%, 4%) scale(0.97); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        @keyframes driftB {
+            0%   { transform: translate(0, 0) scale(1); }
+            40%  { transform: translate(-4%, -2%) scale(1.06); }
+            80%  { transform: translate(2%, -3%) scale(0.96); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .canvas-z101 {
+            background: radial-gradient(
+                ellipse 70% 60% at 55% 40%,
+                rgba(4, 60, 40, 0.7) 0%,
+                rgba(4, 40, 28, 0.3) 45%,
+                transparent 75%
+            );
+            mix-blend-mode: color-dodge;
+            z-index: 101;
+            animation: driftA 18s ease-in-out infinite;
+        }
+
+        .canvas-z201 {
+            background: radial-gradient(
+                ellipse 50% 45% at 60% 70%,
+                rgba(4, 28, 20, 0.4) 0%,
+                transparent 65%
+            );
+            mix-blend-mode: difference;
+            z-index: 201;
+            animation: driftB 22s ease-in-out infinite;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        .carousel-card {
+            flex: 0 0 25%;
+            min-width: 0;
+            box-sizing: border-box;
+            border-top: 1px solid rgba(255, 230, 203, 0.15);
+            border-bottom: 1px solid rgba(255, 230, 203, 0.15);
+        }
+
+        .carousel-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border: 1px solid rgba(255, 230, 203, 0.15);
+            background: rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+            font-size: 12px;
+            color: rgba(255,230,203,0.5);
+            flex-shrink: 0;
+            user-select: none;
+        }
+        .carousel-arrow:hover:not(:disabled) {
+            border-color: rgba(255,230,203,0.6);
+            color: #ffe6cb;
+        }
+        .carousel-arrow:disabled {
+            opacity: 0.2;
+            cursor: default;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-hermes-text uppercase tracking-widest antialiased min-h-screen flex flex-col relative overflow-x-hidden"
+      style="font-family: 'JetBrains Mono', monospace;">
+
+    <div class="pointer-events-none fixed inset-0"
+         style="background-color:color-mix(in srgb, #041C1C 100%, transparent);mix-blend-mode:difference;z-index:1"></div>
+
+    <div class="pointer-events-none fixed inset-0"
+         style="mix-blend-mode:difference;opacity:0.033;z-index:2">
+        <img alt="" 
+             style="height:150dvh;width:auto;min-width:100dvw;object-fit:cover;object-position:top left;filter:invert(1);"
+             fetchpriority="low"
+             src="https://hermes-agent.nousresearch.com/_next/static/media/filler-bg0.4dbab353.webp">
+    </div>
+
+    <div class="pointer-events-none fixed inset-0"
+         style="background:radial-gradient(ellipse at 0% 0%, rgba(255,189,56,0) 60%, rgba(255,189,56,0.35) 100%);mix-blend-mode:lighten;opacity:0.22;z-index:99"></div>
+
+    <div class="pointer-events-none fixed inset-0"
+         style="background-color:color-mix(in srgb, #FFFFFF 0%, transparent);mix-blend-mode:difference;z-index:100"></div>
+
+    <div class="pointer-events-none fixed inset-0 canvas-z101"></div>
+    <div class="pointer-events-none fixed inset-0 canvas-z201"></div>
+
+    <div class="relative flex-grow flex flex-col justify-between max-w-[1600px] w-full mx-auto p-6 md:p-8 space-y-12"
+         style="z-index:300">
+        
+        <header class="w-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 border-t border-b border-hermes-border divide-y md:divide-y-0 lg:divide-x divide-hermes-border">
+                <div class="p-4 flex flex-col justify-between">
+                    <h2 class="text-xl font-bold tracking-tighter normal-case leading-none text-white">Vitor Hugo<br>Zeferino</h2>
+                </div>
+                <div class="p-4 flex items-end">
+                    <a href="#sobre" class="text-[11px] opacity-60 hover:opacity-100 transition-opacity">// 01. sobre</a>
+                </div>
+                <div class="p-4 flex items-end">
+                    <a href="#projetos" class="text-[11px] opacity-60 hover:opacity-100 transition-opacity">// 02. projetos</a>
+                </div>
+                <div class="p-4 flex items-end">
+                    <a href="#historico" class="text-[11px] opacity-60 hover:opacity-100 transition-opacity">// 03. histórico</a>
+                </div>
+                <div class="p-4 flex items-end justify-between lg:items-end">
+                    <span class="text-[11px] opacity-40">v0.14.0</span>
+                    <span class="text-[11px] font-bold text-hermes-accent tracking-widest animate-pulse">● CORE_ACTIVE</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="space-y-16">
+            
+            <section id="sobre" class="grid grid-cols-1 lg:grid-cols-5 border-b border-hermes-border pb-12 gap-8">
+                <div class="lg:col-span-4 space-y-6 pr-0 lg:pr-12">
+                    <small class="text-xs opacity-40 block tracking-[0.2em]">MINHA TRAJETÓRIA • MIT LICENSE</small>
+                    <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold leading-[1.12] tracking-wide text-white normal-case">
+                        Engenheiro de Software especializado em infraestrutura de microserviços, IA agentica e infraestrutura cloud.
+                    </h1>
+                    <p class="text-xs md:text-sm tracking-normal normal-case opacity-50 leading-relaxed max-w-3xl">
+                        Focado em gerar soluções de alto impacto e escalabilidade, com experiência comprovada em projetos dentro e fora da empresa, incluindo iniciativas open source.
+                    </p>
+                </div>
+                
+                <div class="border-t lg:border-t-0 lg:border-l border-hermes-border pt-6 lg:pt-0 lg:pl-6 flex flex-col justify-between space-y-6">
+                    <div class="space-y-4 text-[11px]">
+                        <span class="opacity-40 block tracking-widest">// core_stack</span>
+                        <div class="space-y-1.5 font-mono">
+                            <div class="flex justify-between"><span>[01] JAVA/GOLANG</span> <span class="text-hermes-accent">●</span></div>
+                            <div class="flex justify-between"><span>[02] SPRING BOOT</span> <span class="text-hermes-accent">●</span></div>
+                            <div class="flex justify-between"><span>[03] AGENTIC AI</span> <span class="opacity-60">●</span></div>
+                            <div class="flex justify-between"><span>[04] CLOUD</span> <span class="opacity-60">●</span></div>
+                            <div class="flex justify-between"><span>[05] DEV_OPS</span> <span class="opacity-60">●</span></div>
+                        </div>
+                    </div>
+                    <div class="text-[10px] opacity-40 space-y-1 font-mono">
+                        <div>LOC // BLUMENAU, BR</div>
+                        <div>CEL // +55 47 992474906</div>
+                        <div class="flex text-nowrap">MAIL // VITORHUGOZEFERINO@HOTMAIL.COM</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+                <div class="lg:col-span-3 space-y-2">
+                    <div class="flex items-center justify-between text-[11px] opacity-40">
+                        <span>1. inicializar_ambiente</span>
+                        <span class="text-[10px] opacity-30">ENV_SET</span>
+                    </div>
+                    <div class="border border-hermes-border px-4 py-3 text-xs font-mono lowercase flex justify-between items-center"
+                         style="background:rgba(0,0,0,0.4)">
+                        <code class="break-all text-hermes-text/90"><span class="text-hermes-accent">curl</span> -fsSL https://vitorhugo.dev/setup.sh | bash</code>
+                        <span class="text-[10px] tracking-widest opacity-40 uppercase cursor-pointer hover:text-white transition-colors ml-4">COPY</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projetos" class="space-y-6">
+                <div class="flex justify-between items-center border-b border-hermes-border pb-2">
+                    <small class="text-xs font-bold tracking-[0.2em]">// 02. projetos</small>
+                    <div class="flex items-center gap-3">
+                        <span id="carousel-counter" class="text-xs opacity-40 font-mono">[01 / 05]</span>
+                        <button id="btn-prev" class="carousel-arrow" disabled aria-label="anterior">&#8592;</button>
+                        <button id="btn-next" class="carousel-arrow" aria-label="próximo">&#8594;</button>
+                    </div>
+                </div>
+
+                <div class="relative" style="overflow:hidden;">
+                    <div id="carousel-track" class="carousel-track"
+                         style="background:rgba(0,0,0,0.1); align-items: stretch;">
+
+                        <div class="carousel-card flex flex-col justify-between min-h-[260px] hover:bg-white/[0.01] transition-colors p-6 border-l border-hermes-border">
+                            <div class="space-y-4">
+                                <div class="flex justify-between text-[10px] opacity-40 font-mono">
+                                    <span>ID: 01</span>
+                                    <span class="text-hermes-accent">[SAAS_LIVE]</span>
+                                </div>
+                                <h3 class="text-base font-bold text-white tracking-wide">WAME API</h3>
+                                <p class="text-xs tracking-normal normal-case opacity-60 leading-relaxed">
+                                    SaaS completo de automação de mensageria via WhatsApp. Backend em Go com autenticação, integração de pagamentos com Stripe e infraestrutura provisionada na Oracle Cloud com CI/CD via GitHub Actions e Jenkins.
+                                </p>
+                            </div>
+                            <div class="pt-4 flex justify-between items-center text-[10px] border-t border-hermes-border/40 mt-6 font-mono">
+                                <span class="opacity-40">GO / ORACLE / STRIPE</span>
+                                <a href="https://wameapi.com/" target="_blank" class="text-white hover:text-hermes-accent transition-colors">WAMEAPI ↗</a>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card flex flex-col justify-between min-h-[260px] hover:bg-white/[0.01] transition-colors p-6 border-l border-hermes-border">
+                            <div class="space-y-4">
+                                <div class="flex justify-between text-[10px] opacity-40 font-mono">
+                                    <span>ID: 02</span>
+                                    <span>[REST_API]</span>
+                                </div>
+                                <h3 class="text-base font-bold text-white tracking-wide">BITCOIN API</h3>
+                                <p class="text-xs tracking-normal normal-case opacity-60 leading-relaxed">
+                                    API REST em Spring Boot para consulta histórica de preços de Bitcoin. Pipeline CI/CD completo com GitHub Actions, Docker e Jenkins realizando o deploy automático no servidor da Oracle Cloud.
+                                </p>
+                            </div>
+                            <div class="pt-4 flex justify-between items-center text-[10px] border-t border-hermes-border/40 mt-6 font-mono">
+                                <span class="opacity-40">JAVA / SPRING BOOT / DOCKER</span>
+                                <a href="https://github.com/vitorhugoze/bitcoin-api" target="_blank" class="text-white hover:text-hermes-accent transition-colors">GITHUB ↗</a>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card flex flex-col justify-between min-h-[260px] hover:bg-white/[0.01] transition-colors p-6 border-l border-hermes-border">
+                            <div class="space-y-4">
+                                <div class="flex justify-between text-[10px] opacity-40 font-mono">
+                                    <span>ID: 03</span>
+                                    <span>[OPEN_SOURCE]</span>
+                                </div>
+                                <h3 class="text-base font-bold text-white tracking-wide">DATA VAULT</h3>
+                                <p class="text-xs tracking-normal normal-case opacity-60 leading-relaxed">
+                                    Skill para o OpenClaw publicada no ClawHub que adiciona persistencia de dados para agentes de IA. Permite que agentes gravem e leiam informações em formato colunar, facilitando a construção de memórias de longo prazo.
+                                </p>
+                            </div>
+                            <div class="pt-4 flex justify-between items-center text-[10px] border-t border-hermes-border/40 mt-6 font-mono">
+                                <span class="opacity-40">OpenClaw</span>
+                                <a href="https://github.com/vitorhugoze/lance-store" target="_blank" class="text-white hover:text-hermes-accent transition-colors">GITHUB ↗</a>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card flex flex-col justify-between min-h-[260px] hover:bg-white/[0.01] transition-colors p-6 border-l border-hermes-border">
+                            <div class="space-y-4">
+                                <div class="flex justify-between text-[10px] opacity-40 font-mono">
+                                    <span>ID: 04</span>
+                                    <span>[AGENTIC_AI]</span>
+                                </div>
+                                <h3 class="text-base font-bold text-white tracking-wide">EMAIL MONITOR AGENT</h3>
+                                <p class="text-xs tracking-normal normal-case opacity-60 leading-relaxed">
+                                    Agente autônomo construído com Hermes Agent que monitora e-mails não lidos das últimas 24h, gera resumos contextualizados via sub-agente e entrega as notificações diretamente via WhatsApp.
+                                </p>
+                            </div>
+                            <div class="pt-4 flex justify-between items-center text-[10px] border-t border-hermes-border/40 mt-6 font-mono">
+                                <span class="opacity-40">HERMES AGENT</span>
+                                <a href="https://github.com/vitorhugoze/agente-resumo-emails" target="_blank" class="text-white hover:text-hermes-accent transition-colors">GITHUB ↗</a>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card flex flex-col justify-between min-h-[260px] hover:bg-white/[0.01] transition-colors p-6 border-l border-r border-hermes-border">
+                            <div class="space-y-4">
+                                <div class="flex justify-between text-[10px] opacity-40 font-mono">
+                                    <span>ID: 05</span>
+                                    <span>[CLI_TOOL]</span>
+                                </div>
+                                <h3 class="text-base font-bold text-white tracking-wide">CRONOS BACKUP</h3>
+                                <p class="text-xs tracking-normal normal-case opacity-60 leading-relaxed">
+                                    Solução de gerenciamento de backups em Go, composta por CLI e serviço em Go. Utilizada para realizar backups via agendamento, suportando múltiplos agendamentos simultâneos e limpeza automática de backups antigos.
+                                </p>
+                            </div>
+                            <div class="pt-4 flex justify-between items-center text-[10px] border-t border-hermes-border/40 mt-6 font-mono">
+                                <span class="opacity-40">GO</span>
+                                <a href="https://github.com/vitorhugoze/cronos" target="_blank" class="text-white hover:text-hermes-accent transition-colors">GITHUB ↗</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="historico" class="grid grid-cols-1 lg:grid-cols-5 border border-hermes-border divide-y lg:divide-y-0 lg:divide-x divide-hermes-border"
+                     style="background:rgba(0,0,0,0.1)">
+                <div class="p-6 space-y-2 lg:col-span-1">
+                    <span class="text-xs opacity-40 block">// 03. histórico</span>
+                    <h4 class="text-sm font-bold tracking-wider text-white">TRAJETÓRIA PROFISSIONAL</h4>
+                </div>
+                <div class="p-6 lg:col-span-4 space-y-8">
+                    <div class="space-y-2">
+                        <div class="flex flex-col sm:flex-row justify-between text-xs font-mono gap-1">
+                            <span class="font-bold text-white">ESQUEMÁTIKA — ENGENHEIRO DE SOFTWARE</span>
+                            <span class="opacity-50">2022.08 – PRESENTE</span>
+                        </div>
+                        <p class="text-xs tracking-normal normal-case opacity-60 leading-relaxed">
+                            Desenvolvimento em ambiente ERP com foco em automação e IA aplicada. Construí um agente de IA com fluxo de multietapas para Business Intelligence que transforma históricos de vendas em insights estratégicos utilizando OpenClaw; implantei assistente RAG para suporte técnico, auxiliando clientes na resolução de dúvidas técnicas; automatizei o fluxo de lançamento de notas fiscais via PlugStorage, cortando em 50%+ a carga operacional de lançamentos financeiros; e viabilizei envio em lote de cobranças via WhatsApp com integração WAHA.
+                        </p>
+                    </div>
+                    <div class="space-y-2 pt-6 border-t border-hermes-border">
+                        <div class="flex flex-col sm:flex-row justify-between text-xs font-mono gap-1">
+                            <span class="font-bold text-white">T-SYSTEMS — SUPORTE TÉCNICO ESPECIALIZADO ERP</span>
+                            <span class="opacity-50">9 MESES</span>
+                        </div>
+                        <p class="text-xs tracking-normal normal-case opacity-60 leading-relaxed">
+                            Diagnóstico e acompanhamento de sistemas ERP proprietários embarcados em grandes plantas automotivas através do monitoramento analítico de logs de sistemas.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══ SEÇÃO ACADÊMICA + CERTIFICAÇÕES ══ -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 border-t border-hermes-border pt-8 font-mono text-[11px]">
+                <div class="space-y-3">
+                    <span class="opacity-40 block tracking-widest">// académico</span>
+                    <div class="space-y-1">
+                        <div class="text-white font-bold">MBA EM ENGENHARIA DE SOFTWARE — USP</div>
+                        <div class="opacity-50">2024.10 — 2027.04 - EM ANDAMENTO</div>
+                    </div>
+                    <div class="space-y-1 pt-2">
+                        <div class="text-white font-bold">ANALISE E DESENVOLVIMENTO DE SISTEMAS — ESTÁCIO</div>
+                        <div class="opacity-50">2019.01 — 2022.06</div>
+                    </div>
+                </div>
+                <div class="space-y-3 border-t lg:border-t-0 lg:border-l border-hermes-border pt-4 lg:pt-0 lg:pl-6">
+                    <span class="opacity-40 block tracking-widest">// certificações_google</span>
+                    <div class="space-y-1">
+                        <a href="https://www.skills.google/public_profiles/fc362154-c800-4829-8169-a516c58ec809/badges/22716233" target="_blank" class="text-white font-bold hover:text-hermes-accent transition-colors block">INTRODUCTION TO GENERATIVE AI ↗</a>
+                        <div class="opacity-50">GOOGLE SKILLS · ISSUED: 2026.03</div>
+                    </div>
+                    <div class="space-y-1 pt-1">
+                        <a href="https://www.skills.google/public_profiles/fc362154-c800-4829-8169-a516c58ec809/badges/22742558" target="_blank" class="text-white font-bold hover:text-hermes-accent transition-colors block">TRANSFORMER MODELS AND BERT MODEL ↗</a>
+                        <div class="opacity-50">GOOGLE SKILLS · ISSUED: 2026.03</div>
+                    </div>
+                </div>
+                <div class="space-y-3 border-t lg:border-t-0 lg:border-l border-hermes-border pt-4 lg:pt-0 lg:pl-6">
+                    <span class="opacity-40 block tracking-widest">// certificações_linkedin</span>
+                    <div class="space-y-1">
+                        <a href="https://www.linkedin.com/learning/certificates/77aac50ace7e9276a072b58a1c93239899a17b1da83542d33f9ddfd6bb40e1f7" target="_blank" class="text-white font-bold hover:text-hermes-accent transition-colors block">INTEGRANDO IA GENERATIVA NA ESTRATÉGIA DE NEGÓCIOS ↗</a>
+                        <div class="opacity-50">LINKEDIN LEARNING</div>
+                    </div>
+                    <div class="space-y-1 pt-1">
+                        <a href="https://www.linkedin.com/learning/certificates/8660067209c2de411dbe2e6fff709b8b8b62b4ae4c6d77a8d91e9788f37ba257" target="_blank" class="text-white font-bold hover:text-hermes-accent transition-colors block">TÉCNICAS AVANÇADAS DE JAVA ↗</a>
+                        <div class="opacity-50">LINKEDIN LEARNING</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="grid grid-cols-1 md:grid-cols-2 gap-8 border-t border-hermes-border pt-8 text-xs font-mono">
+            <div class="space-y-2">
+                <small class="opacity-40 block text-[10px] tracking-[0.2em]">VITOR HUGO ZEFERINO SYSTEM TERMINAL</small>
+                <p class="normal-case opacity-50 tracking-normal text-[11px] max-w-sm">
+                    Disponível para discutir sobre tecnologia, inteligência artificial e software em geral. Sinta-se à vontade para entrar em contato.
+                </p>
+            </div>
+            <div class="space-y-1.5 md:text-right text-hermes-text/80 text-[11px]">
+                <div>GIT => <a href="https://github.com/vitorhugoze" target="_blank" class="text-white hover:text-hermes-accent transition-colors">[GITHUB.COM/VITORHUGOZE]</a></div>
+                <div>LINKEDIN => <a href="https://www.linkedin.com/in/vitorhugozeferino" target="_blank" class="text-white hover:text-hermes-accent transition-colors">[LINKEDIN.COM/VITORHUGOZEFERINO]</a></div>
+                <div>LICENSED UNDER => <span class="text-white">MIT_2026</span></div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+    (function () {
+        const TOTAL = 5;
+        const VISIBLE = 4;
+
+        const track    = document.getElementById('carousel-track');
+        const btnPrev  = document.getElementById('btn-prev');
+        const btnNext  = document.getElementById('btn-next');
+        const counter  = document.getElementById('carousel-counter');
+        const cards    = Array.from(track.querySelectorAll('.carousel-card'));
+
+        let current = 0;
+
+        function cardWidth() {
+            return track.parentElement.offsetWidth / VISIBLE;
+        }
+
+        function render(animate) {
+            const offset = current * cardWidth();
+            if (!animate) {
+                track.style.transition = 'none';
+            } else {
+                track.style.transition = 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+            }
+            track.style.transform = `translateX(-${offset}px)`;
+
+            const pad = n => String(n).padStart(2, '0');
+            counter.textContent = `[${pad(current + 4)} / ${pad(TOTAL)}]`;
+
+            btnPrev.disabled = current === 0;
+            btnNext.disabled = current >= TOTAL - VISIBLE;
+        }
+
+        btnPrev.addEventListener('click', () => {
+            if (current > 0) { current--; render(true); }
+        });
+
+        btnNext.addEventListener('click', () => {
+            if (current < TOTAL - VISIBLE) { current++; render(true); }
+        });
+
+        window.addEventListener('resize', () => render(false));
+
+        render(false);
+        requestAnimationFrame(() => {
+            track.style.transition = 'transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)';
+        });
+    })();
+    </script>
+
+</body>
+</html>
